@@ -7,7 +7,6 @@ class ImageHandler:
         self.load_image()
 
     def load_image(self):
-        """Загружает изображение по указанному пути."""
         try:
             self.image = Image.open(self.image_path)
         except FileNotFoundError:
@@ -16,12 +15,10 @@ class ImageHandler:
             raise Exception(f"Ошибка при открытии изображения: {e}")
 
     def convert_to_jpg(self, output_path):
-        """Конвертирует изображение в JPG и сохраняет по новому пути."""
         self.image.convert("RGB").save(output_path, "JPEG")
         return output_path
 
     def rotate_45_degrees(self):
-        """Поворачивает изображение на 45 градусов."""
         self.image = self.image.rotate(45, expand=True)
 
 class ImageProcessor:
@@ -29,9 +26,7 @@ class ImageProcessor:
         self.image = image.copy()
 
     def apply_sharpen_filter(self):
-        """Применяет фильтр повышения резкости (SHARPEN)."""
         self.image = self.image.filter(ImageFilter.SHARPEN)
 
     def add_border(self, border_width=15):
-        """Добавляет рамку вокруг изображения."""
         self.image = ImageOps.expand(self.image, border=border_width, fill="black")
